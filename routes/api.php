@@ -18,6 +18,14 @@ Route::post('/users', [UserController::class, 'store']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+Route::get('/docs/{file?}', function ($file = 'api-docs.json') {
+    $path = storage_path('api-docs/' . $file);
+    if (file_exists($path)) {
+        return response()->file($path);
+    }
+    abort(404);
+})->name('l5-swagger.default.docs');
  
 Route::fallback(function () {
     return response()->json([

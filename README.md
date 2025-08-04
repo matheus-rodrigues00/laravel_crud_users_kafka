@@ -42,11 +42,18 @@ docker-compose exec laravel php artisan migrate
 ## URLs dos Serviços
 
 - **Laravel API**: http://localhost:8000
+- **Documentação da API (Swagger)**: http://localhost:8000/api/documentation
 - **Node.js Microservice**: http://localhost:3000
 - **Kafka UI**: http://localhost:8080
 - **MySQL Database**: localhost:3306
 
-## Endpoints da API
+## API Documentation
+
+### Documentação Swagger/OpenAPI
+
+A API está documentada usando a especificação Swagger/OpenAPI 3.0.
+
+- **Swagger UI**: http://localhost:8000/api/documentation
 
 ### Endpoints da API Laravel
 
