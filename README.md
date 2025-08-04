@@ -34,12 +34,17 @@ Uma aplicação Laravel com arquitetura de microserviços event-driven usando Ap
 
 ## Início Rápido
 
-### 1. Iniciar Todos os Serviços
+### 1. Configurar Variáveis de Ambiente
+```bash
+cp .env.example .env
+```
+
+### 2. Iniciar Todos os Serviços
 ```bash
 docker-compose up -d
 ```
 
-### 2. Executar Migrações do Banco
+### 3. Executar Migrações do Banco
 ```bash
 docker-compose exec laravel php artisan migrate
 ```
@@ -107,7 +112,7 @@ curl http://localhost:3000/external
 ### Testes de Integração
 ```bash
 docker-compose exec -e DB_DATABASE=laravel_testing laravel php artisan migrate
-docker-compose exec laravel php artisan test
+docker-compose exec laravel composer test
 ```
 
 ### Como os Testes Funcionam
@@ -139,21 +144,6 @@ Os testes rodam em um **banco de dados separado** (`laravel_testing`) para não 
 - ✅ **Resposta básica da aplicação** funciona
 - ✅ **Estrutura de testes** está configurada corretamente
 
-### Executando Testes Específicos
-
-```bash
-# Todos os testes
-docker-compose exec laravel php artisan test
-
-# Apenas testes de API
-docker-compose exec laravel php artisan test --filter=UserApiTest
-
-# Apenas testes de Kafka
-docker-compose exec laravel php artisan test --filter=KafkaEnvironmentTest
-
-# Teste específico
-docker-compose exec laravel php artisan test --filter=test_can_create_user
-```
 
 ### Passos de Teste Manual
 

@@ -22,15 +22,24 @@ RUN pecl install rdkafka && docker-php-ext-enable rdkafka
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
-
+ 
+COPY composer.json ./
+COPY artisan ./
+COPY bootstrap/ ./bootstrap/
+COPY config/ ./config/
+COPY app/ ./app/
+COPY routes/ ./routes/
+COPY resources/ ./resources/
+COPY database/ ./database/
+ 
+RUN composer install --optimize-autoloader --no-interaction
+ 
 COPY . /var/www/html
-
-COPY --chown=www-data:www-data . /var/www/html
-
-RUN composer install --no-dev --optimize-autoloader
-
+ 
 RUN chown -R www-data:www-data /var/www/html
 
+USER root
+RUN git config --global --add safe.directory /var/www/html
 USER www-data
 
 EXPOSE 8000
