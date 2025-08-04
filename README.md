@@ -5,11 +5,15 @@ Uma aplicação Laravel com arquitetura de microserviços event-driven usando Ap
 ## Arquitetura do Sistema
 
 ```
-Laravel API  ----->  Kafka Broker  ----->  Node.js Microservice
-     |                      |                      |
-     v                      v                      v
-Cria Usuário         user-events Topic      Envia Email
-Dispara Evento       Recebe Mensagem       de Boas-vindas
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   Laravel   │───▶│    Kafka    │───▶│   Node.js   │
+│     API     │    │   Broker    │    │Microservice │
+└─────────────┘    └─────────────┘    └─────────────┘
+       │                   │                   │
+       │                   │                   │
+       ▼                   ▼                   ▼
+   Usuário Criado      user-events      Email de Boas-vindas
+   Evento Disparado      Tópico          Enviado ao Usuário
 ```
 
 ## Funcionalidades
